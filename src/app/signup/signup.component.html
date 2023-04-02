@@ -1,0 +1,158 @@
+<header id="header" class="header fixed-top" style="background-color: #fff" >
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+    <a href="index.html" class="logo d-flex align-items-center">
+      <!-- <img src="assets/img/logo.png" alt=""> -->
+      <span><img style=" width:85px; height:65px"   src="assets/img/fsegt.png" >
+        <img  style=" width: 100px; height: 65px; margin-left: 10px;"  src="assets/img/logo_4c.png" ></span>
+    </a>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <!--li><a class="nav-link scrollto active" href="#hero">Home</a></li-->
+        <li><a class="nav-link scrollto" routerLink="/">Accueil</a></li>
+        <li><a class="nav-link scrollto active" href="#">S'inscrire</a></li>
+        <li><a class="nav-link scrollto" routerLink="/login" >Se connecter</a></li>
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header --><!-- End Header -->
+
+<main id="main">
+
+
+
+  <!-- ======= Breadcrumbs ======= -->
+
+  <div class="login-form">
+
+    <h1>S'inscrire</h1>
+    <div class="container">
+        <div class="main">
+            <div class="content">
+                <h2>Signup</h2>
+
+                <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)" >
+                    <input type="text"  #username="ngModel" [(ngModel)]="userService.selectedUser.username"  name="username"  placeholder="Nom d'utilisateur" required
+                      [ngClass]="{'invalid-textbox' :signUpForm.submitted && !username.valid }" >
+                      <div *ngIf="signUpForm.submitted && !username.valid"  >
+                        <label class="validation-message">Ce champs est requis.</label>
+                      </div>
+
+
+
+                    <input type="text"   #email="ngModel" [(ngModel)]="userService.selectedUser.email"  name="email"     placeholder="Adresse mail institutionnelle"
+                     required [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }" >
+                    <div *ngIf="signUpForm.submitted && email.errors"  >
+                      <label *ngIf="email.errors.required"  class="validation-message">Ce champs est requis. </label>
+                      <label *ngIf="email.errors.pattern"  class="validation-message">Adresse email invalide. </label>
+                    </div>
+
+                    <input type="password"  #password="ngModel" [(ngModel)]="userService.selectedUser.password"  name="password"      placeholder="Mot de passe"
+                      required minlength="6" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }"   >
+                      <div *ngIf="signUpForm.submitted && password.errors"  >
+                        <label *ngIf="password.errors.required"  class="validation-message">Ce champs est requis. </label>
+                        <label *ngIf="password.errors.minlength"  class="validation-message">Saisir au moins 6 caractères. </label>
+                      </div>
+                      <input type="password"  #repassword="ngModel" [(ngModel)]="userService.selectedUser.repassword"  name="repassword"      placeholder="Confirmer mot de passe"
+                      required minlength="6" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !repassword.valid }"   >
+                      <div *ngIf="signUpForm.submitted && repassword.errors"  >
+                        <label *ngIf="repassword.errors.required"  class="validation-message">Ce champs est requis. </label>
+                        <label *ngIf="repassword.errors.minlength"  class="validation-message">Saisir au moins 6 caractères. </label>
+                      </div>
+                      <div *ngIf="repassword.valid && repassword.value != password.value"  >
+                        <label class="validation-message">Le mot de passe entrer ne correspond pas </label>
+                      </div>
+
+                    <button class="btn" type="submit"> Enregistrer </button>
+
+
+<!-- ======= en cas de suuccés ======= -->
+                    <div class="success"  *ngIf="showSuccessMessage" >
+                      Enregistré avec succés.
+
+                    </div>
+
+<!-- ======= en cas d'echec ======= -->
+                    <div class="alert"  *ngIf="serverErrorMessage" >
+                      {{serverErrorMessage}}
+                    </div>
+                  </form>
+               <p class="account"> J'ai déjà un compte. <a routerLink="/login">Se connecter</a></p>
+            </div>
+            <div class="form-img">
+                 <img src="assets/img/Mobile-login.png">
+           </div>
+        </div>
+    </div>
+
+
+
+  </div>
+
+</main>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+
+
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <span>4C FSEGT</span>
+          </a>
+          <p>le Centre de Carrière et de Certification des Compétences « 4C FSEGT» donne accès à tous les étudiants et diplômés de la FSEGT à un service de conseil, de formation, de certification et d’accompagnement à l’Insertion Professionnelle 
+
+          </p>
+          <div class="social-links mt-3">
+
+            <a href="https://www.facebook.com/4CFSEGT" target="_blank" class="facebook"><i class="bi bi-facebook"></i></a>
+
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Nous Contacter </h4>
+          <p>
+            Campus Manar <br>
+            FSEGT<br>
+
+            <strong>Email:</strong> 4C@fsegt.utm.tn<br>
+          </p>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>4C_FSEGT</span></strong>. All Rights Reserved
+    </div>
+
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

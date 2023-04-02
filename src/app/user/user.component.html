@@ -1,0 +1,212 @@
+<header id="header" class="header" style="background-color: white;">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+    <a href="index.html" class="logo d-flex align-items-center">
+      <!-- <img src="assets/img/logo.png" alt=""> -->
+      <span><img style=" width:85px; height:65px"   src="assets/img/fsegt.png" >
+        <img  style=" width: 100px; height: 65px; margin-left: 10px;"  src="assets/img/logo_4c.png" ></span>
+    </a>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+
+        <li ><img src="assets/img/user(2).png" alt="">&nbsp;<app-profil class="logout"></app-profil>&nbsp;&nbsp;<button class="logout" class="btn-primary"(click)="logout()" type="button"> Déconnexion</button></li>
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+<body>
+
+
+  <div class="container">
+    <div class="arrow-wrapper">
+      <a routerLink="/userprofile" title="Précédent"><div class="arrow-left"></div></a>
+    </div>
+    <div class="row">
+
+
+     <div class="wrapper">
+       <h1 class="titre">QUESTIONNAIRE D’EVALUATION DES CANDIDATURES INDIVIDUELLES AVEC COMPETENCES :</h1>
+      <hr>
+      <div class="title">Pour mieux vous connaitre</div>
+      <div class="quest">
+       <form  [formGroup]="QuestForm" (ngSubmit)="onSubmit()">
+          <div class="input-field">
+              <label>Avez vous des activités parascolaires:&nbsp;<span style="color: red;">*</span></label>
+
+      <div class="radio-btn"><input type="radio" class="radio" formControlName="Activites" [value]=1 (change)="onSubmit()"> Oui </div>
+  <div class="radio-btn"><input type="radio"  class="radio" formControlName="Activites" [value]=0 (change)="onSubmit()"> Non </div>
+            </div>
+
+            <div class="input-field">
+              <label>Faites-vous partie d'un club:&nbsp;<span style="color: red;">*</span></label>
+         <div class="radio-btn"><input type="radio"  formControlName="Club" [value]=1 (change)="onSubmit()"> Oui </div>
+         <div class="radio-btn"><input type="radio" formControlName="Club" [value]=0 (change)="onSubmit()" > Non  </div>
+            </div>
+            <div class="input-field">
+              <label>Parlez-nous d’un projet que vous avez réalisé et dont vous êtes fier.
+                  Qu’est-ce qui était passionnant et qu’est-ce qui était difficile dans ce projet ?&nbsp;<span style="color: red;">*</span></label>
+              <textarea class="textarea" formControlName="Projet" (change)="onSubmit()"  ></textarea>
+
+
+            </div>
+            <div  *ngIf="f.Projet.invalid && (f.Projet.dirty || f.Projet.touched)">
+              <label *ngIf="f.Projet.hasError('required')" class="error">Ce champs est requis.</label>
+             </div>
+            <div class="input-field">
+              <label>Parlez-nous de vos compétences et talents : &nbsp;<span style="color: red;">*</span></label>
+              <textarea class="textarea" formControlName="Competences" (change)="onSubmit()"></textarea>
+            </div>
+            <div  *ngIf="f.Competences.invalid && (f.Competences.dirty || f.Competences.touched)">
+              <label *ngIf="f.Competences.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <hr>
+            <div class="title">Interet pour l'entrepreneuriat</div>
+            <div class="input-field">
+              <label>Pourquoi vous intéressez-vous à l’entrepreneuriat ?&nbsp;<span style="color: red;">*</span></label>
+              <textarea class="textarea" formControlName="RaisonInteret" (change)="onSubmit()"></textarea>
+            </div>
+            <div  *ngIf="f.RaisonInteret.invalid && (f.RaisonInteret.dirty || f.RaisonInteret.touched)">
+              <label *ngIf="f.RaisonInteret.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <div class="input-field">
+              <label>Avez-vous déjà participé à des concours d’entrepreneuriat? Le(s) quel(s) ?&nbsp;<span style="color: red;">*</span></label>
+              <textarea class="textarea" formControlName="ConcoursEntrepreneuriale" (change)="onSubmit()"></textarea>
+            </div>
+            <div  *ngIf="f.ConcoursEntrepreneuriale.invalid && (f.ConcoursEntrepreneuriale.dirty || f.ConcoursEntrepreneuriale.touched)">
+              <label *ngIf="f.ConcoursEntrepreneuriale.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <div class="input-field">
+              <label>Avez-vous réalisé des activités se rapportant au domaine de l’entrepreneuriale (formations, cours, coaching, projets, etc.) ?
+                  Quelles ont été vos réalisations ?&nbsp;<span style="color: red;">*</span></label>
+              <textarea class="textarea" formControlName="ActiviteEntreprenariale" (change)="onSubmit()"></textarea>
+            </div>
+            <div  *ngIf="f.ActiviteEntreprenariale.invalid && (f.ActiviteEntreprenariale.dirty || f.ActiviteEntreprenariale.touched)">
+              <label *ngIf="f.ActiviteEntreprenariale.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <hr>
+            <div class="title">Motivation</div>
+            <div class="input-field">
+              <label>Pourquoi souhaitez-vous rejoindre la compétition FSEGT STUDENTS’CHALLENGE
+                   et qu’espérez-vous en retirer ?&nbsp;<span style="color: red;">*</span></label>
+              <textarea class="textarea" formControlName="RaisonDePartitipation" (change)="onSubmit()"></textarea>
+            </div>
+            <div  *ngIf="f.RaisonDePartitipation.invalid && (f.RaisonDePartitipation.dirty || f.RaisonDePartitipation.touched)">
+              <label *ngIf="f.RaisonDePartitipation.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <div class="input-field">
+              <label>Comment avez-vous entendu parler de la compétition FSEGT STUDENTS’CHALLENGE ?&nbsp;<span style="color: red;">*</span></label>
+              <input type="text" class="input" formControlName="FaconEntendu" (change)="onSubmit()" >
+            </div>
+            <div  *ngIf="f.FaconEntendu.invalid && (f.FaconEntendu.dirty || f.FaconEntendu.touched)">
+              <label *ngIf="f.FaconEntendu.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <hr>
+            <div class="title">Informations supplémentaire</div>
+            <div class="input-field">
+              <label>Veuillez télécharger votre CV:  &nbsp;<span style="color: red;">*</span><br>format : png, jpeg, jpg, pdf</label>
+              <input type="file" accept=".png, .jpeg, .jpg, .pdf" class="input" formControlName="CV" (change)="selectCV($event)">
+            </div>
+            <div class="input-field">
+              <label>Veuillez réaliser une vidéo d’une minute pour nous expliquer pourquoi vous devriez être sélectionné en tant que participant à la
+                  compétition FSEGT STUDENTS’CHALLENGE. Téléchargez la vidéo. (.mp4)&nbsp;<span style="color: red;">*</span></label>
+              <input type="file" accept=".mp4" class="input" formControlName="video" (change)="selectVideo($event)">
+            </div>
+            <hr>
+            <div class="title">Engagement</div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" formControlName="quest10" [value]=1 >
+              <label class="form-check-label" for="flexCheckDefault">
+              Je certifie par la présente que toutes les informations ci-dessus sont vraies.
+              </label>
+            </div>
+            <div  *ngIf="f.quest10.invalid && (f.quest10.dirty || f.quest10.touched)">
+              <label *ngIf="f.quest10.hasError('required')" class="error">Ce champs est requis.</label>
+            </div>
+            <br>
+            <div class="input-field">
+              <!-- <input type="submit" value="Envoyer" class="btn" > -->
+                <!-- <input type="submit" value="Envoyer" class="btn" [disabled]="!QuestForm.valid"> -->
+                  <button   class="btn btn btn-icon-split" routerLink="/userprofile" >
+                   <span class="text">Précédent</span>
+                  </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button (click)="Enregistrer()"  class="btn btn btn-icon-split" >
+                  <span class="text">Enregistrer</span>
+                </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button (click)="validate()" class="btn btn btn-icon-split" [disabled]="!QuestForm.valid">
+                  <span class="text">Envoyer</span>
+                </button>
+            </div>
+       </form>
+     </div>
+</div>
+</div>
+
+</div>
+</body>
+
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+
+
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <span>4C FSEGT</span>
+          </a>
+          <p>le Centre de Carrière et de Certification des Compétences « 4C FSEGT» donne accès à tous les étudiants et diplômés de la FSEGT à un service de conseil, de formation, de certification et d’accompagnement à l’Insertion Professionnelle 
+
+          </p>
+          <div class="social-links mt-3">
+
+            <a href="https://www.facebook.com/4CFSEGT" target="_blank" class="facebook"><i class="bi bi-facebook"></i></a>
+
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Nous Contacter </h4>
+          <p>
+            Campus Manar <br>
+            FSEGT<br>
+
+            <strong>Email:</strong> 4C@fsegt.utm.tn<br>
+          </p>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>4C_FSEGT</span></strong>. All Rights Reserved
+    </div>
+
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

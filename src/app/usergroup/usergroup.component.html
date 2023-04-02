@@ -1,0 +1,870 @@
+<header id="header" class="header" style="background-color: white;">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+    <a href="index.html" class="logo d-flex align-items-center">
+      <!-- <img src="assets/img/logo.png" alt=""> -->
+      <span><img style=" width:85px; height:65px"   src="assets/img/fsegt.png" >
+        <img  style=" width: 100px; height: 65px; margin-left: 10px;"  src="assets/img/logo_4c.png" ></span>
+    </a>
+    <nav id="navbar" class="navbar">
+      <ul>
+
+        <li ><img src="assets/img/user(2).png" alt="">&nbsp;<app-profil class="logout"></app-profil>&nbsp;&nbsp;<button class="logout" class="btn-primary"(click)="logout()" type="button"> Déconnexion</button></li>
+
+
+      </ul>
+
+      <i class="bi bi-list mobile-nav-toggle" >
+
+      </i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<body>
+<section class="inner-page">
+
+  <div class="container">
+  <div class="arrow-wrapper">
+      <a routerLink="/userprofile" title="Précédent"><div class="arrow-left"></div></a>
+    </div>
+    <div class="row">
+
+     <div class="wrapper">
+        <div class="title">Informations générales du membre d'équipe 1</div>
+
+          <div class="userform">
+         <form [formGroup]="Etudiant1Form"  (ngSubmit)="onSubmit()">
+           <div class="input-field">
+             <label>Nom:&nbsp;<span style="color: red;">*</span></label>
+             <input type="text" class="input" formControlName="name" />
+             </div>
+           <div  *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">
+            <label *ngIf="f.name.hasError('required')" class="error">Ce champs est requis.</label>
+           </div>
+           <div class="input-field">
+            <label>Prénom:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="prenom"/>
+          </div>
+          <div *ngIf="f.prenom.invalid && (f.prenom.dirty || f.prenom.touched)">
+            <label class="error" *ngIf="f.prenom.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field">
+            <label>Date de naissance:&nbsp;<span style="color: red;">*</span></label>
+            <input type="date" class="input" formControlName="age"/>
+          </div>
+          <div *ngIf="f.age.invalid && (f.age.dirty || f.age.touched)">
+            <label class="error" *ngIf="f.age.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field">
+            <label>Nationalité:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="nationalite"/>
+          </div>
+          <div  *ngIf="f.nationalite.invalid && (f.nationalite.dirty || f.nationalite.touched)">
+            <label  class="error" *ngIf="f.nationalite.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field">
+            <label>Genre:&nbsp;<span style="color: red;">*</span></label>
+            <div class="custom_select">
+            <select formControlName="genre">
+              <option >Masculin</option>
+              <option >Féminin</option>
+            </select>
+            <div *ngIf="f.genre.invalid && (f.genre.dirty || f.genre.touched)">
+              <label class="error" *ngIf="f.genre.hasError('required')">Ce champs est requis.</label>
+            </div>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Téléphone:&nbsp;<span style="color: red;">*</span></label>
+            <input type="tel" class="input" formControlName="Phone" onKeyPress="if(this.value.length==8) return false;"/>
+          </div>
+          <div *ngIf="f.Phone.invalid && (f.Phone.dirty || f.Phone.touched)">
+            <label class="error" *ngIf="f.Phone.hasError('required')">Ce champs est requis.</label>
+            <label  class="error"  *ngIf="f.Phone.hasError('pattern')">Seuls les chiffres sont autorisés.</label>
+          </div>
+          <div class="input-field">
+            <label>Adresse Email:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="email">
+          </div>
+          <div  *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+            <label class="error" *ngIf="f.email.hasError('required')">Ce champs est requis.</label>
+            <label class="error"  *ngIf="f.email.hasError('email')">Entrer une adresse mail valide.</label>
+          </div>
+
+
+          <div class="input-field">
+            <label>Lien Facebook:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="lienfb">
+          </div>
+          <div  *ngIf="f.lienfb.invalid && (f.lienfb.dirty || f.lienfb.touched)">
+            <label class="error" *ngIf="f.lienfb.hasError('required')">Ce champs est requis.</label>
+               </div>
+
+
+
+
+          <div class="input-field">
+            <label>Lien LinkedIn:</label>
+            <input type="text" class="input" formControlName="LienLinkedIn">
+          </div>
+          <div class="input-field">
+            <label>Vous ètes actuellemnt:&nbsp;<span style="color: red;">*</span></label>
+            <div class="col-md-9" (change)="Situation1()">
+              <label class="custom-radio-btn">
+            <input type="radio"  formControlName="Situation" [value]=0/>Etudiant
+            </label>
+            <label class="custom-radio-btn">
+            <input type="radio"  formControlName="Situation" [value]=1/>Diplomé
+            </label>
+            </div>
+          </div>
+
+
+          <div class="input-field" *ngIf="etudiant1||diplome1">
+            <label>Institution: &nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="Institution">
+          </div>
+          <div  *ngIf="f.Institution.invalid && (f.Institution.dirty || f.Institution.touched)">
+            <label class="error" *ngIf="f.Institution.hasError('required')">Ce champs est requis.</label>
+               </div>
+
+          <div class="input-field" *ngIf="etudiant1||diplome1">
+            <label>Domaine d'étude:&nbsp;<span style="color: red;">*</span></label>
+            <div class="custom_select" >
+              <select formControlName="Domaine" (change)="Domaine($event)">
+              <option selected disabled >Selectionner</option>
+              <option >Licence monnaie finance banque assurance</option>
+              <option >Licence commerce et finance internationale </option>
+              <option >Licence analyse et politique économique</option>
+              <option >Licence en busines computing : business intelligence</option>
+              <option>Licence ingénierie économique et financière</option>
+              <option>Licence marketing</option>
+              <option>Licence comptabilité</option>
+              <option>Licence finance </option>
+              <option>Licence management</option>
+              <option>MR en Economie : Economie et Finance internationale (EFI)</option>
+              <option>MR en Economie : Economie Monétaire et Bancaire (EMB)</option>
+              <option>MR Economie de développement (ED)</option>
+              <option>MR Analyse et politique économiques (APE)</option>
+              <option>MR marketing</option>
+              <option>MR Business administration</option>
+              <option>MR Finance</option>
+              <option>MR Comptabilité</option>
+              <option>MR en Economie Quantitative (EQ)</option>
+              <option>Analyse quantitative des politiques économiques et financières des Pays du Maghreb</option>
+              <option>MP Affaires Commerciales internationales (ACI)</option>
+              <option>MP Ingénierie des Systèmes d'Information d'entreprises (ISIE)</option>
+              <option>MP Evaluation et Gestion des Risques en Finance et Assurance (EGRFA)</option>
+              <option>MP Communication marketing et digitale (CMD)</option>
+              <option>MP marketing de la distribution (MD)</option>
+              <option>MP comptabilité financière</option>
+              <option>MP entrepreneuriat et management</option>
+              <option>MP management digital</option>
+              <option>MP Planification de l’éducation</option>
+              <option>MP  Ingénierie fiscale et comptabilité internationale</option>
+
+
+              </select>
+            </div>
+
+          </div>
+          <div *ngIf="f.Domaine.invalid && (f.Domaine.dirty || f.Domaine.touched)">
+            <label   class="error" *ngIf="f.Domaine.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field"  *ngIf="etudiant1||diplome1">
+            <label>Département:&nbsp;<span style="color: red;">*</span></label>
+            <div class="custom_select">
+              <select formControlName="Departement">
+              <option selected disabled >Selectionner</option>
+                <option>Département Management</option>
+                <option>Département Finance</option>
+                <option>Département Marketing</option>
+                <option>Département Méthodes quantitatives</option>
+                <option>Département Economie</option>
+
+              </select>
+            </div>
+          </div>
+          <div  *ngIf="f.Departement.invalid && (f.Departement.dirty || f.Departement.touched)">
+            <label class="error" *ngIf="f.Departement.hasError('required')">Ce champs est requis.</label>
+          </div>
+
+          <div class="input-field" *ngIf="etudiant1">
+            <label>Niveau d'étude:&nbsp;<span style="color: red;">*</span></label>
+          <div class="custom_select" *ngIf="licence">
+            <select formControlName="Niveau">
+              <option selected disabled >Selectionner</option>
+              <option >1 ére Année</option>
+              <option >2 éme Année</option>
+              <option >3 éme Année</option>
+              </select>
+              </div>
+              <div class="custom_select" *ngIf="!licence">
+                <select formControlName="Niveau" >
+
+        <option selected disabled >Selectionner</option>
+                <option >1 ére Année</option>
+                <option >2 éme Année</option>
+                </select>
+                </div>
+            </div>
+          <div *ngIf="f.Niveau.invalid && (f.Niveau.dirty || f.Niveau.touched)">
+            <label class="error" *ngIf="f.Niveau.hasError('required')">Ce champs est requis.</label>
+          </div>
+
+          <!-- <div class="input-field" *ngIf="diplome1">
+            <label>Niveau d'étude:&nbsp;<span style="color: red;">*</span></label>
+          <div class="custom_select">
+            <select formControlName="Niveau" >
+            <option selected disabled>Selectionner</option>
+            <option >1 ére Année</option>
+            <option >2 éme Année</option>
+            </select>
+            </div>
+          </div>
+          <div *ngIf="f.Niveau.invalid && (f.Niveau.dirty || f.Niveau.touched)">
+            <label class="error" *ngIf="f.Niveau.hasError('required')">Ce champs est requis.</label>
+          </div> -->
+          <div class="input-field"*ngIf="etudiant1">
+            <label>Année d'étude:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="Annee" onKeyPress="if(this.value.length==9) return false;" (change)="VerifDate($event)" placeholder="{{dd}}" />
+
+          </div>
+          <div  *ngIf="f.Annee.invalid && (f.Annee.dirty || f.Annee.touched)">
+            <label class="error" *ngIf="f.Annee.hasError('required')">Ce champs est requis.</label>
+          </div>
+
+          <div>
+
+            <div class="input-field" *ngIf="etudiant1">
+            <label>Télécharger Inscription de l'année universitaire en cours:&nbsp;<span style="color: red;">*</span></label>
+            <input type="file" accept=".png, .jpeg, .jpg" class="input" (change)="selectImage($event)" />
+          </div>
+
+
+          </div>
+
+          <div class="input-field" *ngIf="diplome1">
+            <label>Année d'obtention de diplome:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="Annee" onKeyPress="if(this.value.length==9) return false;" (change)="VerifDate($event)" placeholder="{{dd}}" />
+        </div>
+        <div *ngIf="f.Annee.invalid && (f.Annee.dirty || f.Annee.touched)">
+          <label class="error" *ngIf="f.Annee.hasError('required')">Ce champs est requis.</label>
+          <label  class="error"  *ngIf="f.Annee.hasError('pattern')">Seuls les chiffres sont autorisés.</label>
+        </div>
+<div>
+
+  <div class="input-field" *ngIf="diplome1">
+            <label>Télecharger derenier diplome obtenu:&nbsp;<span style="color: red;">*</span></label>
+            <input type="file" accept=".png, .jpeg, .jpg, .pdf" class="input" (change)="selectImage($event)" />
+          </div>
+
+<br>
+</div>
+
+
+<div *ngIf="!Ajout1 && !Ajout2">
+  <div class="input-field">
+     <button   class="btn btn btn-icon-split" routerLink="/userprofile" >
+          <span class="text">Précédent</span>
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" value="Suivant" class="btn" (blur)="TimeOut()">
+</div>
+<div class="alert"  *ngIf="serverErrorMessages"  >
+{{serverErrorMessages}}
+</div>
+</div>
+
+
+         </form>
+
+
+     </div>
+    </div>
+
+    <hr>
+
+
+    <div class="wrapper" *ngIf="Ajout1">
+
+
+        <div class="title">Informations générales du membre d'équipe 2</div>
+
+          <div class="userform">
+         <form [formGroup]="Etudiant2Form"  (ngSubmit)="onSubmit()">
+           <div class="input-field">
+             <label>Nom:&nbsp;<span style="color: red;">*</span></label>
+             <input type="text" class="input" formControlName="name"/>
+             </div>
+           <div  *ngIf="f2.name.invalid && (f2.name.dirty || f2.name.touched)">
+            <label *ngIf="f2.name.hasError('required')" class="error">Ce champs est requis.</label>
+           </div>
+
+           <div class="input-field">
+            <label>Prénom:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="prenom"/>
+          </div>
+          <div *ngIf="f2.prenom.invalid && (f2.prenom.dirty || f2.prenom.touched)">
+            <label class="error" *ngIf="f2.prenom.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field">
+            <label>Date de naissance:&nbsp;<span style="color: red;">*</span></label>
+            <input type="date" class="input" formControlName="age"/>
+          </div>
+          <div *ngIf="f.age.invalid && (f.age.dirty || f.age.touched)">
+            <label class="error" *ngIf="f.age.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field">
+            <label>Nationalité:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="nationalite"/>
+          </div>
+          <div  *ngIf="f2.nationalite.invalid && (f2.nationalite.dirty || f2.nationalite.touched)">
+            <label  class="error" *ngIf="f2.nationalite.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field">
+            <label>Genre:&nbsp;<span style="color: red;">*</span></label>
+            <div class="custom_select">
+            <select formControlName="genre">
+              <option >Masculin</option>
+              <option >Féminin</option>
+            </select>
+            <div *ngIf="f2.genre.invalid && (f2.genre.dirty || f2.genre.touched)">
+              <label class="error" *ngIf="f2.genre.hasError('required')">Ce champs est requis.</label>
+            </div>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Téléphone:&nbsp;<span style="color: red;">*</span></label>
+            <input type="tel" class="input" formControlName="Phone" onKeyPress="if(this.value.length==8) return false;"/>
+          </div>
+          <div *ngIf="f2.Phone.invalid && (f2.Phone.dirty || f2.Phone.touched)">
+            <label class="error" *ngIf="f2.Phone.hasError('required')">Ce champs est requis.</label>
+            <label  class="error"  *ngIf="f2.Phone.hasError('pattern')">Seuls les chiffres sont autorisés.</label>
+          </div>
+          <div class="input-field">
+            <label>Adresse Email:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="email">
+          </div>
+          <div  *ngIf="f2.email.invalid && (f2.email.dirty || f2.email.touched)">
+            <label class="error" *ngIf="f2.email.hasError('required')">Ce champs est requis.</label>
+            <label class="error"  *ngIf="f2.email.hasError('email')">Entrer une adresse mail valide.</label>
+          </div>
+
+
+          <div class="input-field">
+            <label>Lien Facebook:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="lienfb">
+          </div>
+          <div  *ngIf="f2.lienfb.invalid && (f2.lienfb.dirty || f2.lienfb.touched)">
+            <label class="error" *ngIf="f2.lienfb.hasError('required')">Ce champs est requis.</label>
+               </div>
+
+
+
+
+          <div class="input-field">
+            <label>Lien LinkedIn:</label>
+            <input type="text" class="input" formControlName="LienLinkedIn">
+          </div>
+          <div class="input-field">
+            <label>Vous ètes actuellemnt:&nbsp;<span style="color: red;">*</span></label>
+            <div class="col-md-9" (change)="Situation2()">
+              <label class="custom-radio-btn">
+            <input type="radio"  formControlName="Situation" [value]=0/>Etudiant
+            </label>
+            <label class="custom-radio-btn">
+            <input type="radio"  formControlName="Situation" [value]=1/>Diplomé
+            </label>
+            </div>
+          </div>
+
+
+          <div class="input-field" *ngIf="etudiant2||diplome2">
+            <label>Institution: &nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="Institution">
+          </div>
+          <div  *ngIf="f2.Institution.invalid && (f2.Institution.dirty || f2.Institution.touched)">
+            <label class="error" *ngIf="f2.Institution.hasError('required')">Ce champs est requis.</label>
+               </div>
+
+          <div class="input-field" *ngIf="etudiant2||diplome2">
+            <label>Domaine d'étude:&nbsp;<span style="color: red;">*</span></label>
+            <div class="custom_select">
+              <select formControlName="Domaine" (change)="Domaine($event)">
+              <option selected disabled >Selectionner</option>
+              <option >Licence monnaie finance banque assurance</option>
+              <option >Licence commerce et finance internationale </option>
+              <option >Licence analyse et politique économique</option>
+              <option >Licence en busines computing : business intelligence</option>
+              <option>Licence ingénierie économique et financière</option>
+              <option>Licence marketing</option>
+              <option>Licence comptabilité</option>
+              <option>Licence finance </option>
+              <option>Licence management</option>
+              <option>MR en Economie : Economie et Finance internationale (EFI)</option>
+              <option>MR en Economie : Economie Monétaire et Bancaire (EMB)</option>
+              <option>MR Economie de développement (ED)</option>
+              <option>MR Analyse et politique économiques (APE)</option>
+              <option>MR marketing</option>
+              <option>MR Business administration</option>
+              <option>MR Finance</option>
+              <option>MR Comptabilité</option>
+              <option>MR en Economie Quantitative (EQ)</option>
+              <option>Analyse quantitative des politiques économiques et financières des Pays du Maghreb</option>
+              <option>MP Affaires Commerciales internationales (ACI)</option>
+              <option>MP Ingénierie des Systèmes d'Information d'entreprises (ISIE)</option>
+              <option>MP Evaluation et Gestion des Risques en Finance et Assurance (EGRFA)</option>
+              <option>MP Communication marketing et digitale (CMD)</option>
+              <option>MP marketing de la distribution (MD)</option>
+              <option>MP comptabilité financière</option>
+              <option>MP entrepreneuriat et management</option>
+              <option>MP management digital</option>
+              <option>MP Planification de l’éducation</option>
+              <option>MP  Ingénierie fiscale et comptabilité internationale</option>
+
+
+              </select>
+            </div>
+
+          </div>
+          <div *ngIf="f2.Domaine.invalid && (f2.Domaine.dirty || f2.Domaine.touched)">
+            <label   class="error" *ngIf="f2.Domaine.hasError('required')">Ce champs est requis.</label>
+          </div>
+          <div class="input-field"  *ngIf="etudiant2||diplome2">
+            <label>Département:&nbsp;<span style="color: red;">*</span></label>
+            <div class="custom_select">
+              <select formControlName="Departement">
+              <option selected disabled >Selectionner</option>
+                <option>Département Management</option>
+                <option>Département Finance</option>
+                <option>Département Marketing</option>
+                <option>Département Méthodes quantitatives</option>
+                <option>Département Economie</option>
+
+              </select>
+            </div>
+          </div>
+          <div  *ngIf="f2.Departement.invalid && (f2.Departement.dirty || f2.Departement.touched)">
+            <label class="error" *ngIf="f2.Departement.hasError('required')">Ce champs est requis.</label>
+          </div>
+
+          <div class="input-field" *ngIf="etudiant2">
+            <label>Niveau d'étude:&nbsp;<span style="color: red;">*</span></label>
+          <div class="custom_select" *ngIf="licence">
+            <select formControlName="Niveau" >
+              <option selected disabled >Selectionner</option>
+              <option >1 ére Année</option>
+              <option >2 éme Année</option>
+              <option >3 éme Année</option>
+              </select>
+              </div>
+              <div class="custom_select" *ngIf="!licence">
+                <select formControlName="Niveau" >
+
+        <option selected disabled >Selectionner</option>
+                <option >1 ére Année</option>
+                <option >2 éme Année</option>
+                </select>
+                </div>
+            </div>
+          <div *ngIf="f2.Niveau.invalid && (f2.Niveau.dirty || f2.Niveau.touched)">
+            <label class="error" *ngIf="f2.Niveau.hasError('required')">Ce champs est requis.</label>
+          </div>
+
+          <!-- <div class="input-field" *ngIf="diplome2">
+            <label>Niveau d'étude:&nbsp;<span style="color: red;">*</span></label>
+          <div class="custom_select">
+            <select formControlName="Niveau" >
+            <option selected disabled>Selectionner</option>
+            <option >1 ére Année</option>
+            <option >2 éme Année</option>
+            </select>
+            </div>
+          </div>
+          <div *ngIf="f2.Niveau.invalid && (f2.Niveau.dirty || f2.Niveau.touched)">
+            <label class="error" *ngIf="f2.Niveau.hasError('required')">Ce champs est requis.</label>
+          </div> -->
+          <div class="input-field"*ngIf="etudiant2">
+            <label>Année d'étude:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="Annee" onKeyPress="if(this.value.length==9) return false;" (change)="VerifDate($event)" placeholder="{{dd}}" />
+
+          </div>
+          <div  *ngIf="f2.Annee.invalid && (f2.Annee.dirty || f2.Annee.touched)">
+            <label class="error" *ngIf="f2.Annee.hasError('required')">Ce champs est requis.</label>
+          </div>
+
+          <div>
+
+            <div class="input-field" *ngIf="etudiant2">
+            <label>Télécharger Inscription de l'année universitaire en cours:&nbsp;<span style="color: red;">*</span></label>
+            <input type="file" accept=".png, .jpeg, .jpg" class="input"  (change)="selectImage2($event)" />
+          </div>
+
+
+          </div>
+
+          <div class="input-field" *ngIf="diplome2">
+            <label>Année d'obtention de diplome:&nbsp;<span style="color: red;">*</span></label>
+            <input type="text" class="input" formControlName="Annee" onKeyPress="if(this.value.length==9) return false;" (change)="VerifDate($event)" placeholder="{{dd}}" />
+        </div>
+        <div *ngIf="f.Annee.invalid && (f.Annee.dirty || f.Annee.touched)">
+          <label class="error" *ngIf="f.Annee.hasError('required')">Ce champs est requis.</label>
+          <label  class="error"  *ngIf="f.Annee.hasError('pattern')">Seuls les chiffres sont autorisés.</label>
+        </div>
+<div>
+
+  <div class="input-field" *ngIf="diplome2">
+            <label>Télecharger derenier diplome obtenu:&nbsp;<span style="color: red;">*</span></label>
+            <input type="file" accept=".png, .jpeg, .jpg" class="input" (change)="selectImage2($event)" />
+          </div>
+
+</div>
+
+
+<div *ngIf="Ajout1 && !Ajout2">
+  <div class="input-field">
+     <button   class="btn btn btn-icon-split" routerLink="/userprofile" >
+          <span class="text">Précédent</span>
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" value="Suivant" class="btn" (blur)="TimeOut()">
+</div>
+<div class="alert"  *ngIf="serverErrorMessages"  >
+{{serverErrorMessages}}
+</div>
+</div>
+
+
+
+         </form>
+
+
+     </div>
+     </div>
+
+<hr>
+
+
+<div class="wrapper" *ngIf="Ajout2">
+  <div class="title">Informations générales du membre d'équipe 3</div>
+
+  <div class="userform">
+ <form [formGroup]="Etudiant3Form"  (ngSubmit)="onSubmit()">
+   <div class="input-field">
+     <label>Nom:&nbsp;<span style="color: red;">*</span></label>
+     <input type="text" class="input" formControlName="name"/>
+     </div>
+   <div  *ngIf="f3.name.invalid && (f3.name.dirty || f3.name.touched)">
+    <label *ngIf="f3.name.hasError('required')" class="error">Ce champs est requis.</label>
+   </div>
+
+   <div class="input-field">
+    <label>Prénom:&nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="prenom"/>
+  </div>
+  <div *ngIf="f3.prenom.invalid && (f3.prenom.dirty || f3.prenom.touched)">
+    <label class="error" *ngIf="f3.prenom.hasError('required')">Ce champs est requis.</label>
+  </div>
+  <div class="input-field">
+    <label>Date de naissance:&nbsp;<span style="color: red;">*</span></label>
+    <input type="date" class="input" formControlName="age"/>
+  </div>
+  <div *ngIf="f.age.invalid && (f.age.dirty || f.age.touched)">
+    <label class="error" *ngIf="f.age.hasError('required')">Ce champs est requis.</label>
+  </div>
+  <div class="input-field">
+    <label>Nationalité:&nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="nationalite"/>
+  </div>
+  <div  *ngIf="f3.nationalite.invalid && (f3.nationalite.dirty || f3.nationalite.touched)">
+    <label  class="error" *ngIf="f3.nationalite.hasError('required')">Ce champs est requis.</label>
+  </div>
+  <div class="input-field">
+    <label>Genre:&nbsp;<span style="color: red;">*</span></label>
+    <div class="custom_select">
+    <select formControlName="genre">
+      <option >Masculin</option>
+      <option >Féminin</option>
+    </select>
+    <div *ngIf="f3.genre.invalid && (f3.genre.dirty || f3.genre.touched)">
+      <label class="error" *ngIf="f3.genre.hasError('required')">Ce champs est requis.</label>
+    </div>
+    </div>
+  </div>
+  <div class="input-field">
+    <label>Téléphone:&nbsp;<span style="color: red;">*</span></label>
+    <input type="tel" class="input" formControlName="Phone" onKeyPress="if(this.value.length==8) return false;"/>
+  </div>
+  <div *ngIf="f3.Phone.invalid && (f3.Phone.dirty || f3.Phone.touched)">
+    <label class="error" *ngIf="f3.Phone.hasError('required')">Ce champs est requis.</label>
+    <label  class="error"  *ngIf="f3.Phone.hasError('pattern')">Seuls les chiffres sont autorisés.</label>
+  </div>
+  <div class="input-field">
+    <label>Adresse Email:&nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="email">
+  </div>
+  <div  *ngIf="f3.email.invalid && (f3.email.dirty || f3.email.touched)">
+    <label class="error" *ngIf="f3.email.hasError('required')">Ce champs est requis.</label>
+    <label class="error"  *ngIf="f3.email.hasError('email')">Entrer une adresse mail valide.</label>
+  </div>
+
+
+  <div class="input-field">
+    <label>Lien Facebook:&nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="lienfb">
+  </div>
+  <div  *ngIf="f3.lienfb.invalid && (f3.lienfb.dirty || f3.lienfb.touched)">
+    <label class="error" *ngIf="f3.lienfb.hasError('required')">Ce champs est requis.</label>
+       </div>
+
+
+
+
+  <div class="input-field">
+    <label>Lien LinkedIn:</label>
+    <input type="text" class="input" formControlName="LienLinkedIn">
+  </div>
+  <div class="input-field">
+    <label>Vous ètes actuellemnt:&nbsp;<span style="color: red;">*</span></label>
+    <div class="col-md-9" (change)="Situation3()">
+      <label class="custom-radio-btn">
+    <input type="radio"  formControlName="Situation" [value]=0/>Etudiant
+    </label>
+    <label class="custom-radio-btn">
+    <input type="radio"  formControlName="Situation" [value]=1/>Diplomé
+    </label>
+    </div>
+  </div>
+
+
+  <div class="input-field" *ngIf="etudiant3||diplome3">
+    <label>Institution: &nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="Institution">
+  </div>
+  <div  *ngIf="f3.Institution.invalid && (f3.Institution.dirty || f3.Institution.touched)">
+    <label class="error" *ngIf="f3.Institution.hasError('required')">Ce champs est requis.</label>
+       </div>
+
+  <div class="input-field" *ngIf="etudiant3||diplome3">
+    <label>Domaine d'étude:&nbsp;<span style="color: red;">*</span></label>
+    <div class="custom_select">
+      <select formControlName="Domaine" (change)="Domaine($event)" >
+      <option selected disabled >Selectionner</option>
+      <option >Licence monnaie finance banque assurance</option>
+      <option >Licence commerce et finance internationale </option>
+      <option >Licence analyse et politique économique</option>
+      <option >Licence en busines computing : business intelligence</option>
+      <option>Licence ingénierie économique et financière</option>
+      <option>Licence marketing</option>
+      <option>Licence comptabilité</option>
+      <option>Licence finance </option>
+      <option>Licence management</option>
+      <option>MR en Economie : Economie et Finance internationale (EFI)</option>
+      <option>MR en Economie : Economie Monétaire et Bancaire (EMB)</option>
+      <option>MR Economie de développement (ED)</option>
+      <option>MR Analyse et politique économiques (APE)</option>
+      <option>MR marketing</option>
+      <option>MR Business administration</option>
+      <option>MR Finance</option>
+      <option>MR Comptabilité</option>
+      <option>MR en Economie Quantitative (EQ)</option>
+      <option>Analyse quantitative des politiques économiques et financières des Pays du Maghreb</option>
+      <option>MP Affaires Commerciales internationales (ACI)</option>
+      <option>MP Ingénierie des Systèmes d'Information d'entreprises (ISIE)</option>
+      <option>MP Evaluation et Gestion des Risques en Finance et Assurance (EGRFA)</option>
+      <option>MP Communication marketing et digitale (CMD)</option>
+      <option>MP marketing de la distribution (MD)</option>
+      <option>MP comptabilité financière</option>
+      <option>MP entrepreneuriat et management</option>
+      <option>MP management digital</option>
+      <option>MP Planification de l’éducation</option>
+      <option>MP  Ingénierie fiscale et comptabilité internationale</option>
+
+
+      </select>
+    </div>
+
+  </div>
+  <div *ngIf="f3.Domaine.invalid && (f3.Domaine.dirty || f3.Domaine.touched)">
+    <label   class="error" *ngIf="f3.Domaine.hasError('required')">Ce champs est requis.</label>
+  </div>
+  <div class="input-field"  *ngIf="etudiant3||diplome3">
+    <label>Département:&nbsp;<span style="color: red;">*</span></label>
+    <div class="custom_select">
+      <select formControlName="Departement">
+      <option selected disabled >Selectionner</option>
+        <option>Département Management</option>
+        <option>Département Finance</option>
+        <option>Département Marketing</option>
+        <option>Département Méthodes quantitatives</option>
+        <option>Département Economie</option>
+
+      </select>
+    </div>
+  </div>
+  <div  *ngIf="f3.Departement.invalid && (f3.Departement.dirty || f3.Departement.touched)">
+    <label class="error" *ngIf="f3.Departement.hasError('required')">Ce champs est requis.</label>
+  </div>
+
+  <div class="input-field" *ngIf="etudiant3">
+    <label>Niveau d'étude:&nbsp;<span style="color: red;">*</span></label>
+  <div class="custom_select" *ngIf="licence">
+    <select formControlName="Niveau" >
+      <option selected disabled >Selectionner</option>
+      <option >1 ére Année</option>
+      <option >2 éme Année</option>
+      <option >3 éme Année</option>
+      </select>
+      </div>
+      <div class="custom_select" *ngIf="!licence">
+        <select formControlName="Niveau" >
+
+<option selected disabled >Selectionner</option>
+        <option >1 ére Année</option>
+        <option >2 éme Année</option>
+        </select>
+        </div>
+    </div>
+  <div *ngIf="f3.Niveau.invalid && (f3.Niveau.dirty || f3.Niveau.touched)">
+    <label class="error" *ngIf="f3.Niveau.hasError('required')">Ce champs est requis.</label>
+  </div>
+
+  <!-- <div class="input-field" *ngIf="diplome3">
+    <label>Niveau d'étude:&nbsp;<span style="color: red;">*</span></label>
+  <div class="custom_select">
+    <select formControlName="Niveau" >
+    <option selected disabled>Selectionner</option>
+    <option >1 ére Année</option>
+          <option >2 éme Année</option>
+    </select>
+    </div>
+  </div>
+  <div *ngIf="f3.Niveau.invalid && (f3.Niveau.dirty || f3.Niveau.touched)">
+    <label class="error" *ngIf="f3.Niveau.hasError('required')">Ce champs est requis.</label>
+  </div> -->
+  <div class="input-field"*ngIf="etudiant3">
+    <label>Année d'étude:&nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="Annee" onKeyPress="if(this.value.length==9) return false;" (change)="VerifDate($event)" placeholder="{{dd}}" />
+
+  </div>
+  <div  *ngIf="f3.Annee.invalid && (f3.Annee.dirty || f3.Annee.touched)">
+    <label class="error" *ngIf="f3.Annee.hasError('required')">Ce champs est requis.</label>
+  </div>
+
+  <div>
+
+    <div class="input-field" *ngIf="etudiant3">
+    <label>Télécharger Inscription de l'année universitaire en cours:&nbsp;<span style="color: red;">*</span></label>
+    <input type="file" accept=".png, .jpeg, .jpg" class="input"  (change)="selectImage3($event)" />
+  </div>
+
+  </div>
+
+  <div class="input-field" *ngIf="diplome3">
+    <label>Année d'obtention de diplome:&nbsp;<span style="color: red;">*</span></label>
+    <input type="text" class="input" formControlName="Annee" onKeyPress="if(this.value.length==9) return false;" (change)="VerifDate($event)" placeholder="{{dd}}" />
+  </div>
+  <div *ngIf="f.Annee.invalid && (f.Annee.dirty || f.Annee.touched)">
+    <label class="error" *ngIf="f.Annee.hasError('required')">Ce champs est requis.</label>
+    <label  class="error"  *ngIf="f.Annee.hasError('pattern')">Seuls les chiffres sont autorisés.</label>
+  </div>
+<div>
+
+<div class="input-field" *ngIf="diplome3">
+    <label>Télecharger derenier diplome obtenu:&nbsp;<span style="color: red;">*</span></label>
+    <input type="file" accept=".png, .jpeg, .jpg" class="input" (change)="selectImage3($event)" />
+  </div>
+
+
+</div>
+
+
+
+    <br>
+    <div *ngIf="Ajout2" >
+      <div class="input-field">
+         <button   class="btn btn btn-icon-split" routerLink="/userprofile" >
+          <span class="text">Précédent</span>
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+   <input type="submit" value="Suivant" class="btn" (blur)="TimeOut()">
+ </div>
+ <div class="alert" id="menu" *ngIf="serverErrorMessages"  >
+  {{serverErrorMessages}}
+</div>
+    </div>
+
+
+
+ </form>
+</div>
+</div>
+    </div>
+  </div>
+<button class="button" *ngIf="!Ajout2" (click)="Ajouter()">Ajouter un autre membre d'equipe</button>
+</section><!-- End Hero -->
+
+</body>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+
+
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <span>4C FSEGT</span>
+          </a>
+           <p>le Centre de Carrière et de Certification des Compétences « 4C FSEGT» donne accès à tous les étudiants et diplômés de la FSEGT  à un service de conseil, de formation, de certification et d’accompagnement à l’Insertion Professionnelle 
+
+          </p>
+          <div class="social-links mt-3">
+
+            <a href="https://www.facebook.com/4CFSEGT" target="_blank" class="facebook"><i class="bi bi-facebook"></i></a>
+
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Nous Contacter </h4>
+          <p>
+            Campus Manar <br>
+            FSEGT<br>
+
+            <strong>Email:</strong> 4C@fsegt.utm.tn<br>
+          </p>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>4C_FSEGT</span></strong>. All Rights Reserved
+    </div>
+
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
